@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GovScheme AI — Find Government Schemes</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <span class="logo-icon">🇮🇳</span>
+                <span>GovScheme <strong>AI</strong></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#home" data-i18n="navHome">Home</a>
+                <a href="#schemes" data-i18n="navSchemes">Schemes</a>
+                <a href="#eligibility" data-i18n="navEligibility">Eligibility</a>
+                <a href="#help" data-i18n="navHelp">Application Help</a>
+                <a href="#about" data-i18n="navAbout">About</a>
+
+                <!-- Sign In Button -->
+<button type="button" class="signin-btn" id="openLogin">
+    Sign In
+</button>
+
+            </nav>
+
+            <select id="language" aria-label="Choose language">
+                <option value="English">English</option>
+                <option value="Hindi">हिन्दी</option>
+                <option value="Marathi">मराठी</option>
+            </select>
+        </div>
+    </header>
+
+
+    <div class="login-modal" id="loginModal">
+
+    <div class="login-box">
+
+        <button type="button" id="closeLogin" class="close-login">
+            &times;
+        </button>
+
+        <h2>Welcome Back!</h2>
+
+        <form id="loginForm">
+
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" required>
+
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required>
+
+            <button type="submit" class="login-submit">Sign In</button>
+
+        </form>
+
+        <button type="button" id="guestLogin" class="guest-btn">
+            Continue as Guest
+        </button>
+
+        <p id="loginMessage"></p>
+
+    </div>
+</div>
+
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <span class="eyebrow" data-i18n="heroEyebrow">
+                YOUR GUIDE TO GOVERNMENT SCHEMES
+            </span>
+
+            <h1 data-i18n="heroTitle">
+                Find the Government Schemes Made for You
+            </h1>
+
+            <p data-i18n="heroDescription">
+                Explore schemes, understand eligibility, discover benefits,
+                and learn how to apply.
+            </p>
+
+            <div class="hero-search">
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search schemes by name or category..."
+                    data-i18n-placeholder="searchPlaceholder"
+                    aria-label="Search government schemes"
+                >
+
+                <button id="searchButton" class="btn btn-primary">
+                    <span data-i18n="searchButton">Search</span>
+                </button>
+            </div>
+
+            <a href="#categories" class="btn btn-light" data-i18n="exploreButton">
+                Explore Schemes ↓
+            </a>
+        </div>
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+    <section class="section" id="categories">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow" data-i18n="categoryEyebrow">EXPLORE BY CATEGORY</span>
+                <h2 data-i18n="categoryTitle">Who are you looking for?</h2>
+                <p data-i18n="categoryDescription">
+                    Choose a category to find related government schemes.
+                </p>
+            </div>
+
+            <div class="category-grid">
+                <button class="category-card active" data-category="All">
+                    <span class="category-icon">🌐</span>
+                    <span data-i18n="allSchemes">All Schemes</span>
+                </button>
+
+                <button class="category-card" data-category="Students">
+                    <span class="category-icon">🎓</span>
+                    <span data-i18n="students">Students</span>
+                </button>
+
+                <button class="category-card" data-category="Farmers">
+                    <span class="category-icon">🌾</span>
+                    <span data-i18n="farmers">Farmers</span>
+                </button>
+
+                <button class="category-card" data-category="Women">
+                    <span class="category-icon">👩</span>
+                    <span data-i18n="women">Women</span>
+                </button>
+
+                <button class="category-card" data-category="Families">
+                    <span class="category-icon">🏠</span>
+                    <span data-i18n="families">Families</span>
+                </button>
+
+                <button class="category-card" data-category="Senior Citizens">
+                    <span class="category-icon">👴</span>
+                    <span data-i18n="seniorCitizens">Senior Citizens</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="state-scheme-result" id="stateSchemeResult"></div>
+
+    
+
+<!-- Sign In popup -->
+<div class="login-modal" id="loginModal">
+
+    <div class="login-content">
+
+        <button type="button" id="closeLogin">
+            &times;
+        </button>
+
+        <h2>Sign In</h2>
+
+        <input type="email" placeholder="Email">
+
+        <input type="password" placeholder="Password">
+
+        <button type="button">
+            Sign In
+        </button>
+
+        <button type="button" id="continueWithoutGuest">
+            Continue without Guest
+        </button>
+
+    </div>
+
+</div>
+
+    <!-- ================= SCHEME LIST ================= -->
+    <section class="section schemes-section" id="schemes">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow" data-i18n="schemesEyebrow">DISCOVER OPPORTUNITIES</span>
+                <h2 data-i18n="schemesTitle">Government Schemes</h2>
+                <p id="resultMessage" aria-live="polite">
+                    Explore available scheme information.
+                </p>
+            </div>
+
+            <div id="schemeList" class="scheme-grid">
+                <!-- Scheme cards are added by JavaScript -->
+            </div>
+
+            <p id="noResults" class="no-results hidden">
+                No schemes found. Try another search.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= ELIGIBILITY CHECKER ================= -->
+    <section class="section eligibility-section" id="eligibility">
+        <div class="container">
+            <div class="eligibility-box">
+                <div class="eligibility-intro">
+                    <span class="eyebrow" data-i18n="eligibilityEyebrow">QUICK CHECK</span>
+                    <h2 data-i18n="eligibilityTitle">Check Possible Scheme Matches</h2>
+
+                    <p data-i18n="eligibilityDescription">
+                        Enter some basic details to see schemes related to your
+                        selected category. This is only a demonstration and does
+                        not confirm official eligibility.
+                    </p>
+                </div>
+
+                <form id="eligibilityForm" class="eligibility-form">
+                    <label for="userState" data-i18n="stateLabel">State or Union Territory</label>
+                    <select id="userState" required>
+                        <option value="">Select your state</option>
+                        <option>Maharashtra</option>
+                        <option>Gujarat</option>
+                        <option>Madhya Pradesh</option>
+                        <option>Rajasthan</option>
+                        <option>Uttar Pradesh</option>
+                        <option>Other</option>
+                    </select>
+
+                    <label for="userAge" data-i18n="ageLabel">Age</label>
+                    <input
+                        type="number"
+                        id="userAge"
+                        min="1"
+                        max="120"
+                        placeholder="Enter your age"
+                        required
+                    >
+
+                    <label for="userCategory" data-i18n="categoryLabel">Category</label>
+                    <select id="userCategory" required>
+                        <option value="">Choose a category</option>
+                        <option value="Students">Students</option>
+                        <option value="Farmers">Farmers</option>
+                        <option value="Women">Women</option>
+                        <option value="Families">Families</option>
+                        <option value="Senior Citizens">Senior Citizens</option>
+                    </select>
+
+                    <label for="userIncome" data-i18n="incomeLabel">Approximate annual family income (₹)</label>
+                    <input
+                        type="number"
+                        id="userIncome"
+                        min="0"
+                        placeholder="Enter annual income"
+                    >
+
+                    <button type="submit" class="btn btn-primary">
+                        <span data-i18n="checkButton">Find Possible Matches</span>
+                    </button>
+                </form>
+
+                <div id="eligibilityResult" class="eligibility-result hidden" aria-live="polite"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= APPLICATION HELP ================= -->
+    <section class="section help-section" id="help">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow" data-i18n="helpEyebrow">WE CAN HELP YOU GET STARTED</span>
+                <h2 data-i18n="helpTitle">Having Trouble Applying?</h2>
+                <p data-i18n="helpDescription">
+                    Choose the problem you are facing to see some basic troubleshooting steps.
+                </p>
+            </div>
+
+            <div class="help-grid">
+                <button class="help-card" data-help="otp">
+                    <span>📱</span>
+                    <strong data-i18n="helpOtp">OTP not received</strong>
+                    <small data-i18n="helpTap">Click to see suggestions</small>
+                </button>
+
+                <button class="help-card" data-help="login">
+                    <span>🔐</span>
+                    <strong data-i18n="helpLogin">Login problem</strong>
+                    <small data-i18n="helpTap">Click to see suggestions</small>
+                </button>
+
+                <button class="help-card" data-help="upload">
+                    <span>📄</span>
+                    <strong data-i18n="helpUpload">Document upload problem</strong>
+                    <small data-i18n="helpTap">Click to see suggestions</small>
+                </button>
+
+                <button class="help-card" data-help="form">
+                    <span>📝</span>
+                    <strong data-i18n="helpForm">Form field problem</strong>
+                    <small data-i18n="helpTap">Click to see suggestions</small>
+                </button>
+
+                <button class="help-card" data-help="submit">
+                    <span>⚠️</span>
+                    <strong data-i18n="helpSubmit">Unable to submit</strong>
+                    <small data-i18n="helpTap">Click to see suggestions</small>
+                </button>
+
+                <button class="help-card" data-help="status">
+                    <span>🔎</span>
+                    <strong data-i18n="helpStatus">Check application status</strong>
+                    <small data-i18n="helpTap">Click to see suggestions</small>
+                </button>
+            </div>
+
+            <div id="helpAnswer" class="help-answer hidden" aria-live="polite">
+                <h3 id="helpAnswerTitle"></h3>
+                <div id="helpAnswerText"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= AI ASSISTANT ================= -->
+    <section class="section assistant-section" id="assistant">
+        <div class="container">
+            <div class="assistant-box">
+                <div class="assistant-header">
+                    <div>
+                        <span class="assistant-icon">🤖</span>
+                        <div>
+                            <h2 data-i18n="assistantTitle">GovScheme Assistant</h2>
+                            <p data-i18n="assistantSubtitle">Ask a question about finding or applying for schemes.</p>
+                        </div>
+                    </div>
+
+                    <span class="demo-badge" data-i18n="demoBadge">DEMO</span>
+                </div>
+
+                <div class="suggestions">
+                    <button class="suggestion" data-question="How do I apply for a scheme?">
+                        How do I apply?
+                    </button>
+                    <button class="suggestion" data-question="What documents may be required?">
+                        Required documents
+                    </button>
+                    <button class="suggestion" data-question="I am not receiving OTP">
+                        OTP problem
+                    </button>
+                    <button class="suggestion" data-question="How can I check application status?">
+                        Check application status
+                    </button>
+                </div>
+
+                <div id="chatMessages" class="chat-messages" aria-live="polite">
+                    <div class="chat-message bot-message">
+                        Hello! I can provide general guidance about finding schemes
+                        and common application problems. What would you like to know?
+                    </div>
+                </div>
+
+                <form id="chatForm" class="chat-form">
+                    <input
+                        type="text"
+                        id="chatInput"
+                        placeholder="Type your question..."
+                        data-i18n-placeholder="chatPlaceholder"
+                        autocomplete="off"
+                        required
+                    >
+                    <button type="submit" class="btn btn-primary" data-i18n="sendButton">
+                        Send
+                    </button>
+                </form>
+
+                <p class="assistant-note" data-i18n="assistantNote">
+                    This is a rule-based demo assistant, not a live AI or official government service.
+                    Do not enter Aadhaar numbers, passwords, OTPs, or other sensitive information.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+    <section class="section about-section" id="about">
+        <div class="container about-content">
+            <span class="eyebrow" data-i18n="aboutEyebrow">ABOUT THIS PROJECT</span>
+            <h2 data-i18n="aboutTitle">Making Scheme Information Easier to Explore</h2>
+
+            <p data-i18n="aboutDescription">
+                GovScheme AI is an educational website concept that organizes
+                government scheme information by category and provides basic
+                application guidance. Always confirm eligibility, deadlines,
+                documents, and application procedures on the relevant official portal.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>© <span id="currentYear"></span> GovScheme AI</p>
+            <p data-i18n="footerNote">
+                Educational demo. Not affiliated with any government department.
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- ================= SCHEME DETAILS MODAL ================= -->
+    <div id="detailsModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
+        <div class="modal-content">
+            <button class="modal-close" id="closeDetails" aria-label="Close details">&times;</button>
+
+            <div class="modal-heading">
+                <span id="detailsIcon" class="details-icon">📘</span>
+                <div>
+                    <span id="detailsCategory" class="details-category"></span>
+                    <h2 id="detailsTitle"></h2>
+                </div>
+            </div>
+
+            <p id="detailsDescription"></p>
+
+            <div class="detail-block">
+                <h3 data-i18n="detailsEligibility">Eligibility information</h3>
+                <p id="detailsEligibilityText"></p>
+            </div>
+
+            <div class="detail-block">
+                <h3 data-i18n="detailsBenefits">Possible benefits</h3>
+                <p id="detailsBenefitsText"></p>
+            </div>
+
+            <div class="detail-block">
+                <h3 data-i18n="detailsDocuments">Documents to check</h3>
+                <ul id="detailsDocuments"></ul>
+            </div>
+
+            <div class="detail-block">
+                <h3 data-i18n="detailsSteps">How to get started</h3>
+                <ol id="detailsSteps"></ol>
+            </div>
+
+            <p class="modal-disclaimer" data-i18n="detailsDisclaimer">
+                Details can change. Verify all information with the official scheme portal
+                or relevant department before applying.
+            </p>
+
+            <a id="officialLink" class="btn btn-primary official-link" href="#" target="_blank" rel="noopener noreferrer">
+                Visit Official Portal ↗
+            </a>
+        </div>
+    </div>
+    
+
+
+    <script src="script.js"></script>
+</body>
+</html>
