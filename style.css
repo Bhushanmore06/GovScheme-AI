@@ -1249,3 +1249,126 @@ nav {
 .state-scheme-result .scheme-grid {
     margin-bottom: 25px;
 }
+
+/* ================= ASSISTANT IMAGE UPLOAD ================= */
+
+.assistant-input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.image-upload-btn {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    background: #f1f5f9;
+
+    cursor: pointer;
+    font-size: 21px;
+
+    transition: 0.2s ease;
+}
+
+.image-upload-btn:hover {
+    transform: scale(1.05);
+    background: #e2e8f0;
+}
+
+.assistant-input-row #chatInput {
+    flex: 1;
+}
+
+.image-preview {
+    margin-top: 10px;
+}
+
+.image-preview-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+    background: #f1f5f9;
+
+    font-size: 14px;
+}
+
+.remove-image {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-modal.show {
+    display: flex;
+}
+
+
+/* ================= STATE PICKER + STATE SCHEMES ================= */
+
+.state-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.state-picker label {
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.state-picker select {
+    min-width: 230px;
+    border: 1px solid var(--primary);
+    background: var(--white);
+    color: var(--text);
+    padding: 11px 14px;
+    border-radius: 9px;
+    font-weight: 600;
+}
+
+.state-scheme-result:empty {
+    display: none;
+}
+
+.state-scheme-result.has-results {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: clamp(20px, 4vw, 38px);
+    box-shadow: var(--shadow);
+    margin: 0 auto 45px;
+}
+
+.state-scheme-result.has-results .section-heading {
+    margin-bottom: 10px;
+}
+
+.state-scheme-category {
+    color: var(--primary-dark);
+}
+
+
+/* ================= LOGO ================= */
+
+.logo-img {
+    display: block;
+    height: 44px;
+    width: auto;
+    max-width: 170px;
+    object-fit: contain;
+}
