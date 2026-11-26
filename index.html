@@ -6,6 +6,7 @@
 
     <title>GovScheme AI — Find Government Schemes</title>
 
+    <link rel="icon" href="logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,7 +16,10 @@
     <header class="header">
         <div class="container nav-container">
             <a href="#home" class="logo">
-                <span class="logo-icon">🇮🇳</span>
+                <!-- Your logo: save the image as logo.png in this folder -->
+                <img src="logo.png" alt="GovScheme AI logo" class="logo-img"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-icon" style="display:none;">🇮🇳</span>
                 <span>GovScheme <strong>AI</strong></span>
             </a>
 
@@ -27,10 +31,9 @@
                 <a href="#about" data-i18n="navAbout">About</a>
 
                 <!-- Sign In Button -->
-<button type="button" class="signin-btn" id="openLogin">
-    Sign In
-</button>
-
+                <button type="button" class="signin-btn" id="openLogin" data-i18n="signIn">
+                    Sign In
+                </button>
             </nav>
 
             <select id="language" aria-label="Choose language">
@@ -42,36 +45,37 @@
     </header>
 
 
+    <!-- ================= SIGN IN POPUP ================= -->
     <div class="login-modal" id="loginModal">
 
-    <div class="login-box">
+        <div class="login-box">
 
-        <button type="button" id="closeLogin" class="close-login">
-            &times;
-        </button>
+            <button type="button" id="closeLogin" class="close-login" data-i18n-aria="closeLabel" aria-label="Close">
+                &times;
+            </button>
 
-        <h2>Welcome Back!</h2>
+            <h2 data-i18n="welcomeBack">Welcome Back!</h2>
 
-        <form id="loginForm">
+            <form id="loginForm">
 
-            <label for="loginEmail">Email Address</label>
-            <input type="email" id="loginEmail" required>
+                <label for="loginEmail" data-i18n="emailLabel">Email Address</label>
+                <input type="email" id="loginEmail" required>
 
-            <label for="loginPassword">Password</label>
-            <input type="password" id="loginPassword" required>
+                <label for="loginPassword" data-i18n="passwordLabel">Password</label>
+                <input type="password" id="loginPassword" required>
 
-            <button type="submit" class="login-submit">Sign In</button>
+                <button type="submit" class="login-submit" data-i18n="signIn">Sign In</button>
 
-        </form>
+            </form>
 
-        <button type="button" id="guestLogin" class="guest-btn">
-            Continue as Guest
-        </button>
+            <button type="button" id="guestLogin" class="guest-btn" data-i18n="continueGuest">
+                Continue as Guest
+            </button>
 
-        <p id="loginMessage"></p>
+            <p id="loginMessage"></p>
 
+        </div>
     </div>
-</div>
 
 
     <!-- ================= HERO ================= -->
@@ -153,39 +157,26 @@
                     <span data-i18n="seniorCitizens">Senior Citizens</span>
                 </button>
             </div>
+
+            <!-- State selector: shows state level schemes -->
+            <div class="state-picker">
+                <label for="stateFilter" data-i18n="stateFilterLabel">Also show state schemes for:</label>
+                <select id="stateFilter">
+                    <option value="" data-i18n="stateFilterNone">No state selected</option>
+                    <option value="Maharashtra" data-i18n="stateMaharashtra">Maharashtra</option>
+                    <option value="Gujarat" data-i18n="stateGujarat">Gujarat</option>
+                    <option value="Madhya Pradesh" data-i18n="stateMadhyaPradesh">Madhya Pradesh</option>
+                    <option value="Rajasthan" data-i18n="stateRajasthan">Rajasthan</option>
+                    <option value="Uttar Pradesh" data-i18n="stateUttarPradesh">Uttar Pradesh</option>
+                </select>
+            </div>
         </div>
     </section>
 
-    <div class="state-scheme-result" id="stateSchemeResult"></div>
-
-    
-
-<!-- Sign In popup -->
-<div class="login-modal" id="loginModal">
-
-    <div class="login-content">
-
-        <button type="button" id="closeLogin">
-            &times;
-        </button>
-
-        <h2>Sign In</h2>
-
-        <input type="email" placeholder="Email">
-
-        <input type="password" placeholder="Password">
-
-        <button type="button">
-            Sign In
-        </button>
-
-        <button type="button" id="continueWithoutGuest">
-            Continue without Guest
-        </button>
-
+    <div class="container">
+        <div class="state-scheme-result" id="stateSchemeResult"></div>
     </div>
 
-</div>
 
     <!-- ================= SCHEME LIST ================= -->
     <section class="section schemes-section" id="schemes">
@@ -208,6 +199,7 @@
         </div>
     </section>
 
+
     <!-- ================= ELIGIBILITY CHECKER ================= -->
     <section class="section eligibility-section" id="eligibility">
         <div class="container">
@@ -226,13 +218,13 @@
                 <form id="eligibilityForm" class="eligibility-form">
                     <label for="userState" data-i18n="stateLabel">State or Union Territory</label>
                     <select id="userState" required>
-                        <option value="">Select your state</option>
-                        <option>Maharashtra</option>
-                        <option>Gujarat</option>
-                        <option>Madhya Pradesh</option>
-                        <option>Rajasthan</option>
-                        <option>Uttar Pradesh</option>
-                        <option>Other</option>
+                        <option value="" data-i18n="selectStatePlaceholder">Select your state</option>
+                        <option value="Maharashtra" data-i18n="stateMaharashtra">Maharashtra</option>
+                        <option value="Gujarat" data-i18n="stateGujarat">Gujarat</option>
+                        <option value="Madhya Pradesh" data-i18n="stateMadhyaPradesh">Madhya Pradesh</option>
+                        <option value="Rajasthan" data-i18n="stateRajasthan">Rajasthan</option>
+                        <option value="Uttar Pradesh" data-i18n="stateUttarPradesh">Uttar Pradesh</option>
+                        <option value="Other" data-i18n="stateOther">Other</option>
                     </select>
 
                     <label for="userAge" data-i18n="ageLabel">Age</label>
@@ -242,17 +234,18 @@
                         min="1"
                         max="120"
                         placeholder="Enter your age"
+                        data-i18n-placeholder="agePlaceholder"
                         required
                     >
 
                     <label for="userCategory" data-i18n="categoryLabel">Category</label>
                     <select id="userCategory" required>
-                        <option value="">Choose a category</option>
-                        <option value="Students">Students</option>
-                        <option value="Farmers">Farmers</option>
-                        <option value="Women">Women</option>
-                        <option value="Families">Families</option>
-                        <option value="Senior Citizens">Senior Citizens</option>
+                        <option value="" data-i18n="chooseCategoryOption">Choose a category</option>
+                        <option value="Students" data-i18n="students">Students</option>
+                        <option value="Farmers" data-i18n="farmers">Farmers</option>
+                        <option value="Women" data-i18n="women">Women</option>
+                        <option value="Families" data-i18n="families">Families</option>
+                        <option value="Senior Citizens" data-i18n="seniorCitizens">Senior Citizens</option>
                     </select>
 
                     <label for="userIncome" data-i18n="incomeLabel">Approximate annual family income (₹)</label>
@@ -261,6 +254,7 @@
                         id="userIncome"
                         min="0"
                         placeholder="Enter annual income"
+                        data-i18n-placeholder="incomePlaceholder"
                     >
 
                     <button type="submit" class="btn btn-primary">
@@ -348,39 +342,66 @@
                 </div>
 
                 <div class="suggestions">
-                    <button class="suggestion" data-question="How do I apply for a scheme?">
+                    <button class="suggestion" data-question="How do I apply for a scheme?" data-question-key="suggestApplyQuestion" data-i18n="suggestApplyLabel">
                         How do I apply?
                     </button>
-                    <button class="suggestion" data-question="What documents may be required?">
+                    <button class="suggestion" data-question="What documents may be required?" data-question-key="suggestDocsQuestion" data-i18n="suggestDocsLabel">
                         Required documents
                     </button>
-                    <button class="suggestion" data-question="I am not receiving OTP">
+                    <button class="suggestion" data-question="I am not receiving OTP" data-question-key="suggestOtpQuestion" data-i18n="suggestOtpLabel">
                         OTP problem
                     </button>
-                    <button class="suggestion" data-question="How can I check application status?">
+                    <button class="suggestion" data-question="How can I check application status?" data-question-key="suggestStatusQuestion" data-i18n="suggestStatusLabel">
                         Check application status
                     </button>
                 </div>
 
                 <div id="chatMessages" class="chat-messages" aria-live="polite">
-                    <div class="chat-message bot-message">
+                    <div class="chat-message bot-message" data-i18n="chatbotGreeting">
                         Hello! I can provide general guidance about finding schemes
                         and common application problems. What would you like to know?
                     </div>
                 </div>
 
                 <form id="chatForm" class="chat-form">
-                    <input
-                        type="text"
-                        id="chatInput"
-                        placeholder="Type your question..."
-                        data-i18n-placeholder="chatPlaceholder"
-                        autocomplete="off"
-                        required
-                    >
-                    <button type="submit" class="btn btn-primary" data-i18n="sendButton">
-                        Send
-                    </button>
+
+                    <div class="assistant-input-row">
+
+                        <!-- Image Upload -->
+                        <label for="imageInput" class="image-upload-btn" title="Upload Image" data-i18n-title="imageUploadTitle">
+                            📷
+                        </label>
+
+                        <input
+                            type="file"
+                            id="imageInput"
+                            accept="image/*"
+                            hidden
+                        >
+
+                        <!-- Chat Input -->
+                        <input
+                            type="text"
+                            id="chatInput"
+                            placeholder="Type your question..."
+                            data-i18n-placeholder="chatPlaceholder"
+                            autocomplete="off"
+                        >
+
+                        <!-- Send -->
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            data-i18n="sendButton"
+                        >
+                            Send
+                        </button>
+
+                    </div>
+
+                    <!-- Selected image preview -->
+                    <div id="imagePreview" class="image-preview"></div>
+
                 </form>
 
                 <p class="assistant-note" data-i18n="assistantNote">
@@ -422,7 +443,7 @@
     <!-- ================= SCHEME DETAILS MODAL ================= -->
     <div id="detailsModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
         <div class="modal-content">
-            <button class="modal-close" id="closeDetails" aria-label="Close details">&times;</button>
+            <button class="modal-close" id="closeDetails" aria-label="Close details" data-i18n-aria="closeLabel">&times;</button>
 
             <div class="modal-heading">
                 <span id="detailsIcon" class="details-icon">📘</span>
@@ -464,7 +485,6 @@
             </a>
         </div>
     </div>
-    
 
 
     <script src="script.js"></script>
